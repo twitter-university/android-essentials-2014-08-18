@@ -1,0 +1,46 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".TweetFragment" >
+
+    <TextView
+        android:id="@+id/tweet_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        style="@style/YambaText.label"
+        android:text="@string/tweet_label" />
+
+    <TextView
+        android:id="@+id/tweet_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/tweet_count"
+        android:textColor="@color/green" />
+
+    <EditText
+        android:id="@+id/tweet_tweet"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:background="@color/fog"
+        android:gravity="top|left"
+        android:hint="@string/tweet_hint"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/tweet_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        style="@style/YambaText.button"
+        android:text="@string/tweet_submit" />
+
+</LinearLayout>
