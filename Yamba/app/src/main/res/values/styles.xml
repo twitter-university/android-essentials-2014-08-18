@@ -14,7 +14,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="YambaText.button">
+    <style name="YambaButton" parent="YambaText">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>

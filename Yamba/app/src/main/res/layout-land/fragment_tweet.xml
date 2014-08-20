@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tweet_label"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/text_pad"
             android:text="@string/tweet_count"
             android:textColor="@color/green"/>
 
@@ -36,9 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            style="@style/YambaText.button"
-            android:text="@string/tweet_submit"/>
+            style="@style/YambaButton"
+            android:text="@string/tweet_submit"
+            android:enabled="false" />
+
     </RelativeLayout>
 
     <EditText
@@ -46,6 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
+        android:padding="@dimen/text_pad"
         android:background="@color/fog"
         android:gravity="top|left"
         android:hint="@string/tweet_hint"
