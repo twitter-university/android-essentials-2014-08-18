@@ -29,6 +29,7 @@ public class TweetActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet);
+
         if (savedInstanceState == null) {
             getFragmentManager()
                 .beginTransaction()
