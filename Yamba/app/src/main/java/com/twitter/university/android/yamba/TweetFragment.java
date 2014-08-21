@@ -99,7 +99,7 @@ public class TweetFragment extends Fragment {
         submitButton.setEnabled(false);
         tweetView.setText(null);
 
-        YambaService.post(getActivity(), tweet);
+        YambaServiceHelper.post(getActivity(), tweet);
     }
 
     private boolean checkTweetLen(int n) {
