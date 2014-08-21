@@ -9,6 +9,8 @@
     <string name="tweet_count">140</string>
     <string name="tweet_hint">Wazzup?</string>
     <string name="tweet_submit">Submit</string>
-    <string name="failure">Tweet failed!</string>
+
+    <!-- Timeline -->
+    <string name="title_activity_timeline">Timeline</string>
 
 </resources>
