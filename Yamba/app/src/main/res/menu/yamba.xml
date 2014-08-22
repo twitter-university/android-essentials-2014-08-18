@@ -1,0 +1,17 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".TweetActivity" >
+
+    <item android:id="@+id/action_about"
+          android:title="@string/about_label"
+          android:showAsAction="never" />
+
+    <item android:id="@+id/action_tweet"
+          android:title="@string/tweet_label"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_timeline"
+          android:title="@string/timeline_label"
+          android:showAsAction="ifRoom" />
+</menu>

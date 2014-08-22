@@ -6,6 +6,7 @@ package com.twitter.university.android.yamba;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -24,6 +26,8 @@ import com.twitter.university.android.yamba.service.YambaContract;
  * A placeholder fragment containing a simple view.
  */
 public class TimelineFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final String TAG = "TIMELINE";
+
     private static final int TIMELINE_LOADER = 42;
 
     private static final String[] FROM = new String[] {
@@ -67,13 +71,26 @@ public class TimelineFragment extends ListFragment implements LoaderManager.Load
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        Log.d("CURSOR", "loaded: " + cursor.getCount());
+        Log.d(TAG, "cursor: " + cursor.getCount());
         adapter.swapCursor(cursor);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         adapter.swapCursor(null);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int p, long id) {
+        Cursor c = (Cursor) l.getItemAtPosition(p);
+
+        Intent i = TimelineDetailFragment.marshallDetails(
+            getActivity(),
+            c.getLong(c.getColumnIndex(YambaContract.Timeline.Columns.TIMESTAMP)),
+            c.getString(c.getColumnIndex(YambaContract.Timeline.Columns.HANDLE)),
+            c.getString(c.getColumnIndex(YambaContract.Timeline.Columns.TWEET)));
+
+        startActivity(i);
     }
 
     @Override

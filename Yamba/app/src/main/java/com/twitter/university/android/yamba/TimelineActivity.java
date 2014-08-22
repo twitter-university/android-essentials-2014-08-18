@@ -1,41 +1,57 @@
 package com.twitter.university.android.yamba;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
+public class TimelineActivity extends YambaActivity {
+    public static final String FRAGMENT_DETAILS = "TimelineActivity.DETAILS";
 
-public class TimelineActivity extends Activity {
+    private boolean usingFragments;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.timeline, menu);
-        return true;
-    }
+    public TimelineActivity() { super(R.layout.activity_timeline); }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected Fragment getRootFragment() { return new TimelineFragment(); }
+
+    @Override
+    public void startActivityFromFragment(Fragment frag, Intent i, int code) {
+        if (usingFragments) { showDetails(i.getExtras()); }
+        else { super.startActivityFromFragment(frag, i, code); }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new TimelineFragment())
-                    .commit();
-        }
+
+        usingFragments = null != findViewById(R.id.fragment_details);
+        if (usingFragments) { addDetailFragment(); }
+    }
+
+    private void addDetailFragment() {
+        FragmentManager mgr = getFragmentManager();
+
+        if (null != mgr.findFragmentByTag(FRAGMENT_DETAILS)) { return; }
+
+        FragmentTransaction xact = mgr.beginTransaction();
+        xact.add(
+            R.id.fragment_details,
+            TimelineDetailFragment.newInstance(null),
+            FRAGMENT_DETAILS);
+        xact.commit();
+    }
+
+    private void showDetails(Bundle args) {
+        FragmentTransaction xact = getFragmentManager().beginTransaction();
+        xact.replace(
+            R.id.fragment_details,
+            TimelineDetailFragment.newInstance(args),
+            FRAGMENT_DETAILS);
+        xact.addToBackStack(null);
+        xact.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        xact.commit();
     }
 }
